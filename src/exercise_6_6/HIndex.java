@@ -18,8 +18,30 @@ public class HIndex {
 		strs = line.split(",");
 		for (int i = 0; i < strs.length; i++) 
 			citations[i] = Integer.parseInt(strs[i]);
+
+		//calculate h-index
+		int hindex = hindex(citations);
 		
+		//output to console
+		System.out.println("The h-index is: " + hindex);
+	}
+	
+	public static int hindex(int[] citations) {
 		//sorting
+		sort(citations);
+
+		//calculate h-index
+		int hindex = 0;
+		for (int j = 0; j < citations.length; j++) {
+			if (citations[j] >= j + 1)
+				hindex = j + 1;
+			else
+				break;
+		}
+		return hindex;
+	}
+
+	public static void sort(int[] citations) {
 		int number = citations.length;
 		for (int i = 0; i < number - 1; i++) {
 			for (int j = 0; j < number - 1; j++) {
@@ -30,17 +52,5 @@ public class HIndex {
 				}
 			}
 		}
-
-		//calculate h-index
-		int hindex = 0;
-		for (int j = 0; j < citations.length; j++) {
-			if (citations[j] >= j + 1)
-				hindex = j + 1;
-			else
-				break;
-		}
-		
-		//output to console
-		System.out.println("The h-index is: " + hindex);
 	}
 }
