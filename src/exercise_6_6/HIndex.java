@@ -6,15 +6,15 @@ import java.util.List;
 public class HIndex {
 	
 	//representation (rep)
-	private final List<Integer> citations;
+	//private final List<Integer> citations;
 
 	//construction method
-	public HIndex(String input) {
-		citations = dealInput(input);
+	public HIndex(/*String input*/) {
+	//	citations = dealInput(input);
 	}
 
-	//private method
-	private List<Integer> dealInput(String input) {
+	//private static method
+	private static List<Integer> dealInput(String input) {
 		
 		if(input == null || input.length() == 0)
 			throw new IllegalArgumentException("Empty input");
@@ -33,9 +33,11 @@ public class HIndex {
 		return citations;
 	}
 
-	//public method
-	public int calcHIndex() {
+	//public static method
+	public static int calcHIndex(String input) {
 
+		List<Integer> citations = dealInput(input);
+		
 		// in order to reuse code, first transform List into an array
 		int[] citationsInArray = new int[citations.size()];
 		for (int i = 0; i < citations.size(); i++)
@@ -74,8 +76,8 @@ public class HIndex {
 
 		String[] inputs = new String[] {"10", "0,11,32,1"};
 		for(int i=0;i<inputs.length;i++) {
-			HIndex h = new HIndex(inputs[i]);
-			System.out.println(h.calcHIndex());
+			//HIndex h = new HIndex(inputs[i]);
+			System.out.println(HIndex.calcHIndex(inputs[i]));
 		}
 	}
 }
