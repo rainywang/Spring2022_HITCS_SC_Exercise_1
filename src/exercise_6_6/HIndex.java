@@ -2,59 +2,39 @@ package exercise_6_6;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class HIndex {
+	
+	//representation (rep)
+	private final List<Integer> citations;
 
-	public static void main(String[] args) {
-
-		// read input from keyboard
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Please input the citation numbers:");
-
-		// use List to store integers instead of array
-		List<Integer> citations = new ArrayList<>();
-		// int[] citations = new int[100];
-		String[] strs;
-		String line = new String();
-
-		// loop, until user inputs legal string
-		while (true) {
-			line = scanner.nextLine();
-			// if the input is empty
-			if (line.length() == 0) {
-				System.out.println("Input empty, please re-input:");
-				continue;
-			}
-
-			// check if each part is integer >= 0
-			boolean legalNumbers = true;
-			strs = line.split(",");
-			for (int i = 0; i < strs.length; i++) {
-				// if not, stop checking others and let user re-input
-				if (!strs[i].matches("[0-9]+")) {
-					System.out.println(strs[i] + " is illegal, please input again: ");
-					legalNumbers = false;
-					break;
-				}
-				// otherwise, store the integer into List
-				citations.add(Integer.parseInt(strs[i]));
-				// citations[i] = Integer.parseInt(strs[i]);
-			}
-			if (!legalNumbers)
-				continue;
-			else {
-				// calculate h-index
-				int hindex = hindex(citations);
-				// output to console
-				System.out.println("The h-index is: " + hindex);
-				break;
-			}
-		}
+	//construction method
+	public HIndex(String input) {
+		citations = dealInput(input);
 	}
 
-	// support List as parameter
-	public static int hindex(List<Integer> citations) {
+	//private method
+	private List<Integer> dealInput(String input) {
+		
+		if(input == null || input.length() == 0)
+			throw new IllegalArgumentException("Empty input");
+		
+		List<Integer> citations = new ArrayList<>();
+		
+		String[] strs = input.split(",");
+		
+		for (int i = 0; i < strs.length; i++) {
+			if(! strs[i].matches("[0-9]+")) 
+				throw new IllegalArgumentException(strs[i] + " is illegal");
+
+			citations.add(Integer.parseInt(strs[i]));
+		}
+		
+		return citations;
+	}
+
+	//public method
+	public int calcHIndex() {
 
 		// in order to reuse code, first transform List into an array
 		int[] citationsInArray = new int[citations.size()];
@@ -75,7 +55,8 @@ public class HIndex {
 		return hindex;
 	}
 
-	public static void sort(int[] citations) {
+	//private method
+	private static void sort(int[] citations) {
 		int number = citations.length;
 		for (int i = 0; i < number - 1; i++) {
 			for (int j = 0; j < number - 1; j++) {
@@ -85,6 +66,16 @@ public class HIndex {
 					citations[j] = temp;
 				}
 			}
+		}
+	}
+	
+	//main() as a client
+	public static void main(String[] args) {
+
+		String[] inputs = new String[] {"10", "0,11,32,1"};
+		for(int i=0;i<inputs.length;i++) {
+			HIndex h = new HIndex(inputs[i]);
+			System.out.println(h.calcHIndex());
 		}
 	}
 }
