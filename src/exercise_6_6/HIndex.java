@@ -9,7 +9,14 @@ public class HIndex {
 		//read input from keyboard
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please input the citation numbers:");
-		String line = scanner.nextLine();
+		
+		//deal with empty input
+		String line = new String();
+		line = scanner.nextLine();
+		while(line.length() == 0) {
+			System.out.println("Input empty, please re-input:");
+			line = scanner.nextLine();
+		}
 
 		//split input string into integers
 		int[] citations = new int[100];
