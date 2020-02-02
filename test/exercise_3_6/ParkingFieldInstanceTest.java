@@ -44,7 +44,7 @@ public class ParkingFieldInstanceTest {
 		assertTrue(!beforeStatus.containsValue("HA001"));
 
 		// 停车
-		pf.parking("HA001", 10, 1);
+		pf.parking("HA001", 10, 1, "Car");
 
 		// 观察：车牌号为plate的车辆停在了车位号为num的车位上
 		Map<Integer, String> afterStatus = pf.status();
@@ -76,9 +76,9 @@ public class ParkingFieldInstanceTest {
 		ParkingField pf = ParkingField.create(lots);
 
 		// 停车：把HA001停在1号车位上，正常执行
-		pf.parking("HA001", 10, 1);
+		pf.parking("HA001", 10, 1, "Car");
 
 		// 停车：把HA001停在2号车位上，应抛出异常，车已在停车场里
-		pf.parking("HA001", 10, 2);
+		pf.parking("HA001", 10, 2, "Car");
 	}
 }

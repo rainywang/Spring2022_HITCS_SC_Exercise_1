@@ -3,13 +3,13 @@ package exercise_3_6;
 import java.util.Calendar;
 
 public class Record {
-	private final Car car;
+	private final Parkable car;
 	private final Lot lot;
 	private final Calendar timeIn = Calendar.getInstance();
 	private Calendar timeOut = null;
 	private double fee = 0;
 
-	public Record(Car car, Lot lot) {
+	public Record(Parkable car, Lot lot) {
 		this.car = car;
 		this.lot = lot;
 	}
@@ -22,7 +22,7 @@ public class Record {
 		return lot;
 	}
 
-	public Car getCar() {
+	public Parkable getCar() {
 		return car;
 	}
 	

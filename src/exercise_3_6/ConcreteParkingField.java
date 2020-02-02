@@ -15,7 +15,7 @@ public class ConcreteParkingField implements ParkingField {
 
 	// Rep
 	private final List<Lot> lots = new ArrayList<>(); // 一组车位
-	private final Map<Lot, Car> status = new HashMap<>(); // 占用情况
+	private final Map<Lot, Parkable> status = new HashMap<>(); // 占用情况
 	private final List<Record> records = new ArrayList<>(); // 停车记录
 
 	// Rep invariants:
@@ -39,9 +39,9 @@ public class ConcreteParkingField implements ParkingField {
 		assert lots.size() >= 5;
 		assert lots.size() >= status.size();
 
-		Set<Car> parkingCars = new HashSet<>();
+		Set<Parkable> parkingCars = new HashSet<>();
 		for (Lot lot : status.keySet()) {
-			Car car = status.get(lot);
+			Parkable car = status.get(lot);
 			assert lots.contains(lot);
 			assert !parkingCars.contains(car);
 			parkingCars.add(car);
@@ -104,9 +104,9 @@ public class ConcreteParkingField implements ParkingField {
 	 * @throws 如果plate车已经停在该停车场，或者num车位已被其他车占用，或者num车位宽度不超过width，或者num并不是合法车位
 	 */
 	@Override
-	public void parking(String plate, int width, int num) throws Exception {
+	public void parking(String plate, int width, int num, String type) throws Exception {
 
-		Car car = new Car(plate, width);
+		Parkable car = Parkable.create(plate, width, type);
 
 		// plate车已经停在该停车场
 		if (status.containsValue(car))
@@ -138,7 +138,7 @@ public class ConcreteParkingField implements ParkingField {
 	}
 
 	@Override
-	public void parking(String plate, int width) {
+	public void parking(String plate, int width, String type) {
 		// TODO Auto-generated method stub
 		checkRep();
 	}
@@ -154,7 +154,7 @@ public class ConcreteParkingField implements ParkingField {
 	public Map<Integer, String> status() {
 		Map<Integer, String> st = new HashMap<>();
 		for (Lot lot : lots) {
-			Car c = status.get(lot);
+			Parkable c = status.get(lot);
 			if (c == null)
 				st.put(lot.getNumber(), "");
 			else

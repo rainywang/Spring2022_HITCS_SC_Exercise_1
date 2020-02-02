@@ -19,13 +19,13 @@ public class Client {
 
 		System.out.println(pf);
 
-		pf.parking("HA001", 10, 1);
-		pf.parking("HA002", 10, 2);
-		pf.parking("HA003", 10, 3);
+		pf.parking("HA001", 10, 1, "Car");
+		pf.parking("HA002", 10, 2, "Motor");
+		pf.parking("HA003", 10, 3, "Plane");
 		System.out.println(pf);
 
-		pf.parking("HA004", 10, 4);
-		pf.parking("HA005", 10, 5);
+		pf.parking("HA004", 10, 4, "Car");
+		pf.parking("HA005", 10, 5, "Motor");
 		System.out.println(pf);
 	}
 }

@@ -38,9 +38,10 @@ public interface ParkingField {
 	 * @param plate  要停进来的车辆车牌号，not null
 	 * @param width  车的宽度，自然数
 	 * @param num 	  指定的停车位编号，自然数
+	 * @param type   车的类型，汽车、飞机、摩托车
 	 * @throws 如果plate车已经停在该停车场，或者num车位已被其他车占用，或者num车位宽度不超过width，或者num并不是合法车位
 	 */
-	public void parking(String plate, int width, int num) throws Exception;
+	public void parking(String plate, int width, int num, String type) throws Exception;
 
 	/**
 	   * 在停车场停车，自动分配空闲停车位
@@ -49,9 +50,10 @@ public interface ParkingField {
 	 * 
 	 * @param plate 要停进来的车辆车牌号
  	 * @param width  车的宽度，自然数
- 	 * @throws 如果plate车已经停在该停车场，或者该车场已经没有超过width的空闲车位
+	 * @param type   车的类型，汽车、飞机、摩托车
+	 * @throws 如果plate车已经停在该停车场，或者该车场已经没有超过width的空闲车位
 	 */
-	public void parking(String plate, int width);
+	public void parking(String plate, int width, String type);
 
 	/**
 	   * 将汽车驶离停车场，plate车原来占用的车位空出来了，计算出本次停车的费用（半小时10元，不足半小时按半小时计算）

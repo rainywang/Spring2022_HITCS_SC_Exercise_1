@@ -1,6 +1,6 @@
 package exercise_3_6;
 
-public class Car {
+public class Car implements Parkable {
 
 	private String plate;
 	private int width;
@@ -10,10 +10,12 @@ public class Car {
 		this.width = width;
 	}
 
+	@Override
 	public int getWidth() {
 		return width;
 	}
 	
+	@Override
 	public String getPlate() {
 		return plate;
 	}
