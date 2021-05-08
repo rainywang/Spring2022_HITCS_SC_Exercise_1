@@ -61,7 +61,7 @@ public class HIndex {
 	private static void sort(int[] citations) {
 		int number = citations.length;
 		for (int i = 0; i < number - 1; i++) {
-			for (int j = 0; j < number - 1; j++) {
+			for (int j = 0; j < number - i -1; j++) {
 				if (citations[j] < citations[j + 1]) {
 					int temp = citations[j + 1];
 					citations[j + 1] = citations[j];
